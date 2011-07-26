@@ -9,7 +9,7 @@ W = 20 # cell width
 Shoes.app :title => 'Game of Life'do
   background khaki
   stroke pink
-  
+
   def initialize_cells(life)
     @height = life.size
     @width = life.first.size
@@ -28,7 +28,7 @@ Shoes.app :title => 'Game of Life'do
       @height.times{|j| @width.times{|i| @cells[j][i].style :fill => (life[j][i].zero? ? white : green)}}
     end
   end
-  
+
   gb = stack
   para link('start'){gb.clear{show_cells}}
   para link('stop'){@e.stop}
