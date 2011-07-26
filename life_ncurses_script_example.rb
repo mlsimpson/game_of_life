@@ -3,4 +3,4 @@ require File.join(File.dirname(__FILE__), 'game_of_life')
 require File.join(File.dirname(__FILE__), 'life_ncurses')
 
 # Use your own GameOfLife class, giving it the parameters you selected.
-LifeNcurses.new(GameOfLife.new(200))
+LifeNcurses.new(GameOfLife.new(40))
