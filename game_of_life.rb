@@ -18,81 +18,43 @@ class GameOfLife
   # AKA:  it returns the game state
   def evolve
 
+    neighbors_array = Array.new
+
     0.upto(@state.length - 1){|row|
+      neighbors_array << Array.new(size=@state.length)
+    }
 
+    0.upto(@state.length - 1){|row|
       0.upto(@state.length - 1){|col|
-
         neighbor_count = 0
-
-        system("clear")
-        @state.each{|srow|
-          p srow
-        }
-
-        puts
-
-        p "@state[#{row}][#{col}] = #{@state[row][col]}"
-        p "------"
-
         for i in (-1..1)
-
           (row + i > (@state.length - 1)) ? i = (0 - (@state.length - 1)) : nil
-
           for j in (-1..1)
-
             (col + j > (@state.length - 1)) ? j = (0 - (@state.length - 1)) : nil
-
             neighbor_count += @state[row+i][col+j] unless (row+i == row && col+j == col)
-            p "@state[#{row+i}][#{col+j}] = #{@state[row+i][col+j]}" unless (row+i == row && col+j == col)
           end
           puts
         end
-        p "neighbor_count = #{neighbor_count}"
-        gets
+        neighbors_array[row][col] = neighbor_count
       }
     }
 
-    rownum = 0
-    @state.map{|row|
-
-      row.map{|col|
-
-        neighbor_count = 0
-
-        system("clear")
-        @state.each{|srow|
-          p srow
-        }
-
-        puts
-
-        p "@state[#{row}][#{col}] = #{@state[row][col]}"
-        p "------"
-
-        for i in (-1..1)
-
-          (row + i > (@state.length - 1)) ? i = (0 - (@state.length - 1)) : nil
-
-          for j in (-1..1)
-
-            (col + j > (@state.length - 1)) ? j = (0 - (@state.length - 1)) : nil
-
-            neighbor_count += @state[row+i][col+j] unless (row+i == row && col+j == col)
-            p "@state[#{row+i}][#{col+j}] = #{@state[row+i][col+j]}" unless (row+i == row && col+j == col)
+    0.upto(@state.length - 1){|row|
+      0.upto(@state.length - 1){|col|
+        if @state[row][col] == 1 # Current state is "Life"
+          if neighbors_array[row][col] < 2 || neighbors_array[row][col] > 3
+            @state[row][col] = 0
           end
-          puts
+        else # Current state is "Dead"
+          if neighbors_array[row][col] == 3
+            @state[row][col] = 1
+          end
         end
-        p "neighbor_count = #{neighbor_count}"
-        gets
       }
-      rownum += 1
     }
 
-    # @state
+    @state
+
   end
 
 end
-
-game = GameOfLife.new(4)
-
-game.evolve

@@ -27,7 +27,7 @@ class LifeNcurses
       clear
       display_title(generation)
       show game_of_life.evolve
-    end 
+    end
   ensure
     endwin
   end
@@ -39,7 +39,7 @@ class LifeNcurses
       end
     end
     refresh
-    sleep 1 
+    sleep 0.25
   end
 
   def display_title(generation)
