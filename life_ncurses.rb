@@ -20,7 +20,7 @@ class LifeNcurses
   MARGIN = 2
   include FFI::NCurses
 
-  def initialize(game_of_life,iterations=100)
+  def initialize(game_of_life,iterations=1000)
     @stdscr = initscr
     cbreak
     (1..iterations).each do |generation|
@@ -39,7 +39,7 @@ class LifeNcurses
       end
     end
     refresh
-    sleep 0.25
+    sleep 0.1
   end
 
   def display_title(generation)
