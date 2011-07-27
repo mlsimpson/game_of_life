@@ -20,6 +20,8 @@ class GameOfLife
 
     neighbors_array = Array.new
 
+    next_state = @state.clone
+
     0.upto(@state.length - 1){|row|
       neighbors_array << Array.new(size=@state.length)
     }
@@ -33,7 +35,6 @@ class GameOfLife
             (col + j > (@state.length - 1)) ? j = (0 - (@state.length - 1)) : nil
             neighbor_count += @state[row+i][col+j] unless (row+i == row && col+j == col)
           end
-          puts
         end
         neighbors_array[row][col] = neighbor_count
       }
